@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">ColorThing</string>
+    <string name="info_text">Click to get RGB values; long-click to add 16 to green value for that sector.</string>
+    <string name="add_green">+32G/reset</string>
+    <string name="remove_green">-32G/reset</string>
+    <string name="info">App details</string>
+    <string name="details">Click: get RGB values for the block.\n\nLong-click: increase block\'s green
+        value by 16 (or reset at end of range).\n\nMenu +/-32G options: change green values for entire screen.
+        (Note: this undoes any block-level changes.)
+        \n\n\nE. Stuckey, 2021</string>
+    <string name="OK">OK</string>
+</resources>
