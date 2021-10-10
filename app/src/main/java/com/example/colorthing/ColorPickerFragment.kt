@@ -1,17 +1,17 @@
 package com.example.colorthing
 
 import android.app.AlertDialog
-import android.content.DialogInterface
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.util.Log
+import androidx.fragment.app.Fragment
 import android.view.*
 import com.example.colorthing.databinding.FragmentColorPickerBinding
 import kotlin.math.min
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.view.doOnLayout
+import androidx.navigation.fragment.findNavController
 
 
 class ColorPickerFragment : Fragment()  {
@@ -24,11 +24,18 @@ class ColorPickerFragment : Fragment()  {
     private var height = 0
     private var colorHeight = 0.0
 
+    private var currentGreen = 0
+
     private var restrictedWidth = 0
     private var restrictedHeight = 0
 
     private var isLongClick = false
     private var pressTime = 0L
+
+    companion object {
+        var greenKey = "GREENKEY"
+        var colorKey = "COLORKEY"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -37,15 +44,24 @@ class ColorPickerFragment : Fragment()  {
 
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putInt(greenKey, currentGreen)
+        super.onSaveInstanceState(outState)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentColorPickerBinding.inflate(layoutInflater)
 
-
+        if (savedInstanceState != null) {
+            currentGreen = savedInstanceState.getInt (greenKey)
+        } else {
+            currentGreen = 0
+        }
         binding.backgroundImage.doOnLayout {
-            constructBitmap(0)
+            constructBitmap(currentGreen)
         }
 
         binding.backgroundImage.setOnLongClickListener{
@@ -55,15 +71,18 @@ class ColorPickerFragment : Fragment()  {
         }
 
          binding.backgroundImage.setOnTouchListener { v, event ->
+
+             var x = event.getX()
+             var y = event.getY()
+             var bitmap = binding.backgroundImage.drawable.toBitmap(width=width - restrictedWidth,
+                 height = height - restrictedHeight, Bitmap.Config.ARGB_8888)
+
+             var pixelColor = bitmap?.getPixel(x.toInt(), y.toInt())
             if (event.action == MotionEvent.ACTION_DOWN) {
                 pressTime = System.currentTimeMillis()
-                var x = event.getX()
-                var y = event.getY()
 
-                var bitmap = binding.backgroundImage.drawable.toBitmap(width=width - restrictedWidth,
-                height = height - restrictedHeight, Bitmap.Config.ARGB_8888)
 
-                var pixelColor = bitmap?.getPixel(x.toInt(), y.toInt())
+
                 var redValue = Color.red(pixelColor)
                 var greenValue = Color.green(pixelColor)
                 var blueValue = Color.blue(pixelColor)
@@ -78,7 +97,12 @@ class ColorPickerFragment : Fragment()  {
 
                      pressTime = 0L
 
-                     addGreenToSector(event.getX().toInt(), event.getY().toInt())
+//                     addGreenToSector(event.getX().toInt(), event.getY().toInt())
+                     val action = ColorPickerFragmentDirections.actionColorPickerFragmentToSingleColorFragment(pixelColor)
+
+                     Log.i("ColorPickerFragment", "alpha ${Color.alpha(pixelColor)}, red ${Color.red(pixelColor)}")
+                this.findNavController().navigate(action)
+
              }
 
              }
@@ -94,7 +118,7 @@ class ColorPickerFragment : Fragment()  {
 
 
     private fun constructBitmap(greenValue: Int){
-
+        currentGreen = greenValue
 
         height = binding.backgroundImage.height //height is ready
         width = binding.backgroundImage.width

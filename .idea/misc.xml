@@ -3,9 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/stuck/AndroidStudioProjects/ColorThing/app/src/main/res/drawable-anydpi-v24/ic_add_green.xml" value="0.1" />
+        <entry key="..\:/Users/stuck/AndroidStudioProjects/ColorThing/app/src/main/res/drawable-anydpi-v24/ic_info.xml" value="0.1" />
+        <entry key="..\:/Users/stuck/AndroidStudioProjects/ColorThing/app/src/main/res/drawable-anydpi-v24/ic_subtract_green.xml" value="0.1" />
+        <entry key="..\:/Users/stuck/AndroidStudioProjects/ColorThing/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="..\:/Users/stuck/AndroidStudioProjects/ColorThing/app/src/main/res/drawable/ic_launcher_background.xml" value="0.12291666666666666" />
         <entry key="..\:/Users/stuck/AndroidStudioProjects/ColorThing/app/src/main/res/layout/activity_main.xml" value="0.12552083333333333" />
         <entry key="..\:/Users/stuck/AndroidStudioProjects/ColorThing/app/src/main/res/layout/fragment_color_picker.xml" value="0.121875" />
+        <entry key="..\:/Users/stuck/AndroidStudioProjects/ColorThing/app/src/main/res/layout/single_color_fragment.xml" value="0.25" />
         <entry key="..\:/Users/stuck/AndroidStudioProjects/ColorThing/app/src/main/res/menu/color.xml" value="0.1" />
       </map>
     </option>

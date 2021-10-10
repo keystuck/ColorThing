@@ -9,5 +9,17 @@
         android:id="@+id/colorPickerFragment"
         android:name="com.example.colorthing.ColorPickerFragment"
         android:label="fragment_color_picker"
-        tools:layout="@layout/fragment_color_picker" />
+        tools:layout="@layout/fragment_color_picker" >
+        <action
+            android:id="@+id/action_colorPickerFragment_to_singleColorFragment"
+            app:destination="@id/singleColorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/singleColorFragment"
+        android:name="com.example.colorthing.SingleColorFragment"
+        android:label="SingleColorFragment" >
+        <argument
+            android:name="color"
+            app:argType="integer" />
+    </fragment>
 </navigation>

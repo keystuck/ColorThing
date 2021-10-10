@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 
-//TODO: accessibility; persistence through rotation; maybe change long-click to expand full-screen?
+//TODO: accessibility;
+// working on: maybe change long-click to expand full-screen?
+// currently problems with databinding
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
