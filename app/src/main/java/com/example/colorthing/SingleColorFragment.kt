@@ -1,6 +1,7 @@
 package com.example.colorthing
 
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.navigation.fragment.navArgs
 import com.example.colorthing.databinding.SingleColorFragmentBinding
 
@@ -20,13 +22,6 @@ class SingleColorFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.single_color_fragment, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-
         var currentColorAsInt = args.color
 
 
@@ -38,7 +33,6 @@ class SingleColorFragment : Fragment() {
 
         var currentColor = Color.argb(currentAlpha, currentRed, currentGreen, currentBlue)
 
-        Log.i("SingleColorFragment", "alpha $currentAlpha red $currentRed")
 
         val viewModelFactory =SingleColorViewModelFactory(currentColor, requireNotNull(activity).application)
         viewModel =ViewModelProvider(this, viewModelFactory).get(SingleColorViewModel::class.java)
@@ -47,7 +41,15 @@ class SingleColorFragment : Fragment() {
 
         binding.viewmodel = viewModel
 
+        //TODO: Spinner isn't working t all - needs limits set as well as hooking up
+        //took binding out of onViewCreated and moved to onCreateView and now
+        //binding seems to work... but onCreateView is deprecated, so investigate
+        //wrote a bindingAdapter but doesn't seem to be working
+
+        return binding.root
     }
+
+
 
 
 }
